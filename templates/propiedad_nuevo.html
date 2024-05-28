@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<section id="aviso">
+    <!-- <div class="container text-center">
+        <button type="button" class="btn btn-outline-dark btn-lg m-2" data-bs-toggle="modal" data-bs-target="#nuevoProductoModal"></button>
+    </div> -->
+
+</section>
+
+<!-- Modal -->
+    <div class="modal fade" id="nuevoProductoModal" tabindex="-1" aria-labelledby="nuevoProductoModalLabel" aria-hidden="true" style="background-color: rgba(255,255,255,0.7);">
+        <div class="modal-dialog modal-lg" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title">Nueva Publicación</h1>
+                    <a href="{% url 'inicio' %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                </div>
+                <!-- barra de mensajes -->
+                {% include "includes/mensajes.html" %}
+                <!-- barra de mensajes -->
+                <div class="modal-body">
+                    <!-- Formulario para ingresar nuevo producto con Clases Bootstrap -->
+                    <form method="post" enctype="multipart/form-data" width="100%" class="row g-3 mx-3">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre del producto..." value="{{ formulario.nombre.value|default_if_none:'' }}">
+                            <label for="nombre" class="form-label">{{formulario.nombre.label}}</label>
+                            {% if formulario.nombre.errors %}<span class="form_error rounded">{{formulario.nombre.errors}}</span>{% endif %}
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección..." value="{{ formulario.direccion.value|default_if_none:'' }}">
+                            <label for="direccion" class="form-label">{{formulario.direccion.label}}</label>
+                            {% if formulario.direccion.errors %}<span class="form_error rounded">{{formulario.direccion.errors}}</span>{% endif %}
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="region" name="region" placeholder="Ingrese la región..." value="{{ formulario.region.value|default_if_none:'' }}">
+                            <label for="region" class="form-label">{{formulario.region.label}}</label>
+                            {% if formulario.region.errors %}<span class="form_error rounded">{{formulario.region.errors}}</span>{% endif %}
+                        </div>
+                        
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="comuna" name="comuna" placeholder="Ingrese la comuna..." value="{{ formulario.comuna.value|default_if_none:'' }}">
+                            <label for="comuna" class="form-label">{{formulario.comuna.label}}</label>
+                            {% if formulario.comuna.errors %}<span class="form_error rounded">{{formulario.comuna.errors}}</span>{% endif %}
+                        </div>
+                        <div></div>
+
+                        <div class="form-floating mb-3">
+                            <textarea type="text" class="form-control" id="id_DescProducto" name="descripcion" rows="3" placeholder="Escriba una reseña del producto..." value="{{ formulario.descripcion.value|default_if_none:'' }}"></textarea>
+                            <label for="id_DescProducto" class="form-label">{{formulario.descripcion.label}}</label>
+                            {% if formulario.descripcion.errors %}<span class="form_error rounded">{{formulario.descripcion.errors}}</span>{% endif %}
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="m2" name="m2_construidos" placeholder="1" value="{{ formulario.m2_construidos.value|default_if_none:'' }}">
+                                        <label for="m2" class="form-label">{{formulario.m2_construidos.label}}</label>
+                                        {% if formulario.m2_construidos.errors %}<span class="form_error rounded">{{formulario.m2_construidos.errors}}</span>{% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="m2_totales" name="m2_totales" placeholder="0" value="{{ formulario.m2_totales.value|default_if_none:'' }}">
+                                        <label for="m2_totales" class="form-label">{{formulario.m2_totales.label}}</label>
+                                        {% if formulario.m2_totales.errors %}<span class="form_error rounded">{{formulario.m2_totales.errors}}</span>{% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="habitaciones" name="habitaciones" placeholder="0" value="{{ formulario.habitaciones.value|default_if_none:'' }}">
+                                        <label for="habitaciones" class="form-label">{{formulario.habitaciones.label}}</label>
+                                        {% if formulario.habitaciones.errors %}<span class="form_error rounded">{{formulario.habitaciones.errors}}</span>{% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="banos" name="banos" placeholder="0" value="{{ formulario.banos.value|default_if_none:'' }}">
+                                        <label for="banos" class="form-label">{{formulario.banos.label}}</label>
+                                        {% if formulario.banos.errors %}<span class="form_error rounded">{{formulario.banos.errors}}</span>{% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="estacionamiento" name="estacionamientos" placeholder="0" value="{{ formulario.estacionamientos.value|default_if_none:'' }}">
+                                        <label for="estacionamiento" class="form-label">{{formulario.estacionamientos.label}}</label>
+                                        {% if formulario.estacionamientos.errors %}<span class="form_error rounded">{{formulario.estacionamientos.errors}}</span>{% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="precio" name="precio" placeholder="0" value="{{ formulario.precio.value|default_if_none:'' }}">
+                                        <label for="precio" class="form-label">{{formulario.precio.label}}</label>
+                                        {% if formulario.precio.errors %}<span class="form_error rounded">{{formulario.precio.errors}}</span>{% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="mb-3">
+                                        <label for="tipo" class="form-label">{{formulario.tipo_inmueble.label}}</label>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" name="tipo_inmueble" id="departamento" value = "departamento" {% if formulario.tipo_inmueble.value %}checked{% endif %}>
+                                            <label class="form-check-label" for="departamento">Departamento</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" name="tipo_inmueble" id="casa" value = "casa" {% if formulario.tipo_inmueble.value %}checked{% endif %}>
+                                            <label class="form-check-label" for="casa">Casa</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" name="tipo_inmueble" id="parcela" value = "parcela" {% if formulario.tipo_inmueble.value %}checked{% endif %}>
+                                            <label class="form-check-label" for="parcela">Parcela</label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mb-3">
+                                        <label for="id_ImagenProducto" class="form-label">Imagen del producto:</label>
+                                        <input type="file" class="form-control" id="id_ImagenProducto" name="imagen" placeholder="Seleccione el archivo" value="{{ formulario.imagen.value|default_if_none:'' }}">
+                                        {% if formulario.imagen.errors %}<span class="form_error rounded">{{formulario.imagen.errors}}</span>{% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Cómo utilizar los botones de radio para seleccionar un booleando -->
+                        <div class="modal-footer">
+                            <a href="{% url 'inicio' %}"><button type="button" class="btn btn-outline-danger btn-lg m-2 cancelar" data-bs-dismiss="modal" style="width: 100px;"><i class="fa-solid fa-xmark fs-2"></i></button></a>
+                            <button type="submit" class="btn btn-outline-success btn-lg m-2 aceptar" style="width: 100px;"><i class="fa-solid fa-check fs-2"></i></button>
+                        </div>
+                    </form>
+                    <!-- Formulario para ingresar nuevo producto con Clases Bootstrap -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Script para activar Modal cuando se cargue la página -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var nuevoProductoModal = new bootstrap.Modal(document.getElementById('nuevoProductoModal'));
+        nuevoProductoModal.show();
+    });
+</script>
+{% endblock %}

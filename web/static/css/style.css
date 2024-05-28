@@ -1,0 +1,109 @@
+
+html {
+    scroll-behavior: smooth;
+
+}
+
+.fab {
+    color: white;
+}
+
+.form_error {
+    font-size: smaller;
+    color: rgb(241, 146, 4);
+}
+.form_span {
+    font-size:x-small;
+    color: #06bb66;
+}
+
+.nav-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.nav-item .menu:hover {
+    color: #f35525!important;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+
+}
+
+.nav-link i {
+    font-size: 2rem;
+}
+
+.nav-link span {
+    font-size: 14px;
+}
+
+#Cabecera {
+    background-image: url('../images/banner-02.jpg');
+    background-size: cover;
+}
+
+#Cabecera h2,h3 {
+    color: white;
+}
+
+
+.modal-title {
+    color:lightgray;
+}
+
+.modal-footer button.aceptar {
+    background-color: #06bb66;
+}
+
+.modal-footer button.cancelar {
+    background-color: #f35525;
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: lightgray;
+}
+
+.messages {
+    list-style-type: none;
+    padding: 0;
+    max-width: 1280px;
+}
+
+.messages .debug {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.messages .info {
+    background-color: #d9edf7;
+    color: #31708f;
+}
+
+.messages .success {
+    background-color: #a8fa87;
+    color: #2e5a2f;
+}
+
+.messages .warning {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+}
+
+.messages .error {
+    background-color: #f2dede;
+    color: #a94442;
+}

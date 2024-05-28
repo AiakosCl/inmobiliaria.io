@@ -1,0 +1,50 @@
+Tarapacá:
+	Casa con jardín, Encantadora casa con amplio jardín y terraza.
+	Casa con piscina, Amplia casa con piscina y jardín privado.
+	Casa en barrio tranquilo, Acogedora casa ubicada en un tranquilo barrio residencial.
+	Casa en condominio, Acogedora casa ubicada en condominio seguro.
+	Casa en venta, Acogedora casa con amplio jardín.
+	Departamento amoblado, Acogedor departamento completamente amoblado.
+	Departamento con terraza, Luminoso departamento con amplia terraza.
+	Departamento con vista al mar, Hermoso departamento con vista panorámica al mar.
+	Departamento en alquiler, Moderno departamento con excelente ubicación.
+	Departamento en edificio nuevo, Moderno departamento en edificio de reciente construcción.
+	Local comercial en venta, Céntrico local comercial en zona de alto tráfico.
+	Local en centro comercial, Estratégico local comercial en concurrido centro comercial.
+	Local en strip center, Estratégico local comercial en concurrido strip center.
+	Local en zona comercial, Amplio local comercial en zona de alto movimiento.
+	Oficina amoblada, Moderna oficina amoblada en edificio de negocios.
+	Oficina en alquiler, Espaciosa oficina en edificio comercial.
+	Oficina en edificio corporativo, Amplia oficina en moderno edificio corporativo.
+	Oficina en edificio inteligente, Oficina de alta tecnología en edificio inteligente.
+	Oficina en zona financiera, Moderna oficina en el corazón de la zona financiera.
+Antofagasta:
+	Sin inmuebles registrados en la Región
+Atacama:
+	Sin inmuebles registrados en la Región
+Coquimbo:
+	Sin inmuebles registrados en la Región
+Valparaíso:
+	Sin inmuebles registrados en la Región
+Región del Libertador Gral. Bernardo O’Higgins:
+	Sin inmuebles registrados en la Región
+Región del Maule:
+	Sin inmuebles registrados en la Región
+Región del Biobío:
+	Sin inmuebles registrados en la Región
+Región de la Araucanía:
+	Sin inmuebles registrados en la Región
+Región de Los Lagos:
+	Sin inmuebles registrados en la Región
+Región Aisén del Gral. Carlos Ibáñez del Campo:
+	Sin inmuebles registrados en la Región
+Región de Magallanes y de la Antártica Chilena:
+	Sin inmuebles registrados en la Región
+Región Metropolitana de Santiago:
+	Sin inmuebles registrados en la Región
+Región de Los Ríos:
+	Sin inmuebles registrados en la Región
+Arica y Parinacota:
+	Sin inmuebles registrados en la Región
+Región de Ñuble:
+	Sin inmuebles registrados en la Región

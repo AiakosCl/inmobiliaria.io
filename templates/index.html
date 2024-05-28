@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+<section class="mt-2" id="contenido">
+
+    {% include "includes/preloader.html" %}
+
+    <div class="section properties">
+        <div class="container">
+            <ul class="properties-filter">
+                <li>
+                    <a class="is_active" href="#!" data-filter="*">Mostrar todos</a>
+                </li>
+                <li>
+                    <a href="#!" data-filter=".depto">Departamentos</a>
+                </li>
+                <li>
+                    <a href="#!" data-filter=".casa">Casas</a>
+                </li>
+                <li>
+                    <a href="#!" data-filter=".parc">Parcelas</a>
+                </li>
+            </ul>
+            <div class="row properties-box">
+                <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 depto">
+                    <div class="item">
+                        <a href="#!"><img src="{% static 'images/property-01.jpg' %}" alt=""></a>
+                        <span class="category">Luxury Villa</span>
+                        <h6>$2.264.000</h6>
+                        <h4><a href="#!">18 Old Street Miami, OR 97219</a></h4>
+                        <ul>
+                            <li>Habitaciones: <span>8</span></li>
+                            <li>Baños: <span>8</span></li>
+                            <li>Area: <span>545m2</span></li>
+                            <li>Pisos: <span>3</span></li>
+                            <li>Estacionamientos: <span>6 spots</span></li>
+                        </ul>
+                        <div class="main-button">
+                            <a href="#!">Agenda una visita</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+
+{% endblock %}

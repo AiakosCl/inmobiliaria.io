@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<section id="usuarios">
+    <!-- <div class="container text-center">
+        <button type="button" class="btn btn-outline-dark btn-lg m-2" data-bs-toggle="modal" data-bs-target="#nuevoProductoModal"></button>
+    </div> -->
+
+</section>
+
+<!-- Modal -->
+    <div class="modal fade" id="nuevoProductoModal" tabindex="-1" aria-labelledby="nuevoProductoModalLabel" aria-hidden="true" style="background-color: rgba(255,255,255,0.7);">
+        <div class="modal-dialog modal-lg" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title">Registro</h1>
+                    <a href="{% url 'inicio' %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                </div>
+                <!-- barra de mensajes -->
+                {% include "includes/mensajes.html" %}
+                <!-- barra de mensajes -->
+                <div class="modal-body">
+                    <!-- Formulario para ingresar nuevo producto con Clases Bootstrap -->
+                    <form method="post" enctype="multipart/form-data" width="100%" class="row g-3 mx-3">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="username" name="username" placeholder="Ingrese su correo..." value="{{ formulario.username.value|default_if_none:'' }}">
+                            <label for="username" class="form-label">{{formulario.username.label}}</label>
+                            {% if formulario.username.errors %}<span class="form_error rounded">{{formulario.usernme.errors}}</span>{% endif %}
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Ingrese su nombre(s)" value="{{ formulario.first_name.value|default_if_none:'' }}">
+                            <label for="first_name" class="form-label">{{formulario.first_name.label}}</label>
+                            {% if formulario.first_name.errors %}<span class="form_error rounded">{{formulario.first_name.errors}}</span>{% endif %}
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Ingrese la región..." value="{{ formulario.last_name.value|default_if_none:'' }}">
+                            <label for="last_name" class="form-label">{{formulario.last_name.label}}</label>
+                            {% if formulario.last_name.errors %}<span class="form_error rounded">{{formulario.last_name.errors}}</span>{% endif %}
+                        </div>
+                        
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese la rut..." value="{{ formulario.rut.value|default_if_none:'' }}">
+                            <label for="rut" class="form-label">{{formulario.rut.label}}</label>
+                            {% if formulario.rut.errors %}<span class="form_error rounded">{{formulario.rut.errors}}</span>{% endif %}
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la rut..." value="{{ formulario.direccion.value|default_if_none:'' }}">
+                            <label for="direccion" class="form-label">{{formulario.direccion.label}}</label>
+                            {% if formulario.direccion.errors %}<span class="form_error rounded">{{formulario.direccion.errors}}</span>{% endif %}
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese la rut..." value="{{ formulario.telefono.value|default_if_none:'' }}">
+                            <label for="telefono" class="form-label">{{formulario.telefono.label}}</label>
+                            {% if formulario.telefono.errors %}<span class="form_error rounded">{{formulario.telefono.errors}}</span>{% endif %}
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="id_password1" name="password1" placeholder=""></input>
+                            <label for="id_password1">Ingrese su contraseña:</label>
+                            {% if formulario.password1.errors %}<span class="form_error rounded">{{formulario.password1.errors}}</span>{% endif %}
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" name="password2" autocomplete="new-password"
+                                required="" id="id_password2" placeholder=""></input>
+                            <label for="id_password2">Reitere su contraseña:</label>
+                            {% if formulario.password.errors %}<span class="form_error rounded">{{formulario.password.errors}}</span>{% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tipo" class="form-label">{{formulario.tipo_usuario.label}}</label>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="tipo_usuario" id="arrendador" value = "arrendador" {% if formulario.tipo_usuario.value %}checked{% endif %}>
+                                <label class="form-check-label" for="arrendador">Arrendador</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="tipo_usuario" id="arrendatario" value = "arrendatario" {% if not formulario.tipo_usuario.value %}checked{% endif %}>
+                                <label class="form-check-label" for="arrendatario">Arrendatario</label>
+                            </div>
+                        </div>
+                        <!-- Cómo utilizar los botones de radio para seleccionar un booleando -->
+                        <div class="modal-footer">
+                            <a href="{% url 'inicio' %}"><button type="button" class="btn btn-outline-danger btn-lg m-2 cancelar" data-bs-dismiss="modal" style="width: 100px;"><i class="fa-solid fa-xmark fs-2"></i></button></a>
+                            <button type="submit" class="btn btn-outline-success btn-lg m-2 aceptar" style="width: 100px;"><i class="fa-solid fa-check fs-2"></i></button>
+                        </div>
+                    </form>
+                    <!-- Formulario para ingresar nuevo producto con Clases Bootstrap -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Script para activar Modal cuando se cargue la página -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var nuevoProductoModal = new bootstrap.Modal(document.getElementById('nuevoProductoModal'));
+        nuevoProductoModal.show();
+    });
+</script>
+{% endblock %}

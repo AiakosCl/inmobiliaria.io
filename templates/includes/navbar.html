@@ -1,0 +1,110 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'inicio' %}"><img src="{% static 'images/Logo2-transparent.png' %}" alt="" height="50px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex ms-0 me-2" role="search">
+                <input class="form-control me-2" type="search" placeholder="Ingrese comuna..." aria-label="Search">
+                <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <ul class="navbar-nav ms-auto me-0 mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link menu" aria-current="page" href="{% url 'inicio' %}">
+                        <i class="fa-solid fa-house"></i>
+                        <span>inicio</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu" aria-current="page" href="{% url 'inicio' %}">
+                        <i class="fa-solid fa-people-group"></i>
+                        <span>Nosotros</span></a>
+                </li>
+                {% if user.is_authenticated %}
+                    {% if user.tipo_usuario == 'arrendador' %}
+                    <li class="nav-item dropdown menu">
+                        <a class="nav-link dropdown-toggle menu" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                            <i class="fa-solid fa-user fs-1"></i>
+                            <span>Arrendador</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item menu" href="{% url 'NuevoAviso' %}#aviso"><i class="fa-solid fa-file-lines"></i> Nueva publicación</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item menu" href="#" target="_blank"><i class="fa-regular fa-envelope" {% if mensajes_pendientes > 0 %} style="color: #f35525" {% else %} style="color: #06bb66" {% endif %}></i> Ver mensajes</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item menu" href="#"><i class="fa-solid fa-list"></i> Mi Dashboard</a></li>
+                            <li><a class="dropdown-item menu" href="{% url 'Ficha' user.id %}#usuarios" target="_blank"><i class="fa-solid fa-address-card"></i> Mi cuenta</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% if user.tipo_usuario == 'arrendatario' %}
+                    <li class="nav-item dropdown menu">
+                        <a class="nav-link dropdown-toggle menu" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                            <i class="fa-solid fa-users fs-1"></i>
+                            <span>Arrendador</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item menu" href="{% url 'Ficha' user.id %}#usuarios" target="_blank"><i class="fa-solid fa-address-card"></i> Mi cuenta</a></li>
+                            <li><a class="dropdown-item menu" href="{% url 'NuevoAviso' %}#aviso"><i class="fa-solid fa-file-lines"></i> Nueva publicación</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item menu" href="#" target="_blank"><i class="fa-regular fa-envelope" {% if mensajes_pendientes > 0 %} style="color: #f35525" {% else %} style="color: #06bb66" {% endif %}></i> Ver mensajes</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item menu" href="#" target="_blank">Otras opciones</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% if user.is_staff or user.is_superuser %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle menu" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-user-tie fs-1"></i>
+                            <span style="font-size: 14px;">Administrador</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item menu" href="{% url 'NuevoUsuario' %}#usuarios"><i class="fa-solid fa-user-plus"></i> Nuevo usaurio</a></li>
+                            <li><a class="dropdown-item menu" href="{% url 'ListaUsuarios' %}#usuarios"><i class="fa-solid fa-users-gear"></i> Listar Usuarios</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-arrow-up"></i> Cargas masivas</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item menu" href="/admin/" target="_blank"><i class="fa-solid fa-user-secret"></i> Consola Admin</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ms-2 me-0 text-center">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <table>
+                        <tr>
+                            <td>
+                                <a class="nav-link menu" href="{% url 'logout' %}">Cerrar sesión</a>
+                            </td>
+                            <td>
+                                <a href="#"><i class="fa-regular fa-envelope fs-1" {% if mensajes_pendientes > 0 %} style="color: #f35525" {% else %} style="color: #06bb66" {% endif %}></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

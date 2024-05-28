@@ -1,0 +1,363 @@
+[
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "departamento",
+            "nombre": "Departamento en alquiler",
+            "descripcion": "Moderno departamento con excelente ubicación.",
+            "m2_construidos": 75,
+            "banos": 2,
+            "habitaciones": 3,
+            "estacionamientos": 1,
+            "direccion": "Calle Principal 123",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 500000,
+            "fecha_creacion": "2023-06-10",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "casa",
+            "nombre": "Casa en venta",
+            "descripcion": "Acogedora casa con amplio jardín.",
+            "m2_construidos": 120,
+            "banos": 3,
+            "habitaciones": 4,
+            "estacionamientos": 2,
+            "direccion": "Avenida Secundaria 456",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 800000,
+            "fecha_creacion": "2023-06-09",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "parecela",
+            "nombre": "Oficina en alquiler",
+            "descripcion": "Espaciosa oficina en edificio comercial.",
+            "m2_construidos": 90,
+            "banos": 1,
+            "habitaciones": 2,
+            "estacionamientos": 0,
+            "direccion": "Calle Comercial 789",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 600000,
+            "fecha_creacion": "2023-06-08",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "parecela",
+            "nombre": "Local comercial en venta",
+            "descripcion": "Céntrico local comercial en zona de alto tráfico.",
+            "m2_construidos": 60,
+            "banos": 1,
+            "habitaciones": 0,
+            "estacionamientos": 0,
+            "direccion": "Avenida Principal 987",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 1200000,
+            "fecha_creacion": "2023-06-07",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "departamento",
+            "nombre": "Departamento amoblado",
+            "descripcion": "Acogedor departamento completamente amoblado.",
+            "m2_construidos": 65,
+            "banos": 1,
+            "habitaciones": 2,
+            "estacionamientos": 1,
+            "direccion": "Calle Residencial 321",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 450000,
+            "fecha_creacion": "2023-06-06",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "casa",
+            "nombre": "Casa con piscina",
+            "descripcion": "Amplia casa con piscina y jardín privado.",
+            "m2_construidos": 180,
+            "banos": 4,
+            "habitaciones": 5,
+            "estacionamientos": 3,
+            "direccion": "Avenida Secundaria 654",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 1500000,
+            "fecha_creacion": "2023-06-05",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "parecela",
+            "nombre": "Oficina amoblada",
+            "descripcion": "Moderna oficina amoblada en edificio de negocios.",
+            "m2_construidos": 80,
+            "banos": 1,
+            "habitaciones": 1,
+            "estacionamientos": 1,
+            "direccion": "Calle Comercial 987",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 700000,
+            "fecha_creacion": "2023-06-04",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "parecela",
+            "nombre": "Local en centro comercial",
+            "descripcion": "Estratégico local comercial en concurrido centro comercial.",
+            "m2_construidos": 50,
+            "banos": 1,
+            "habitaciones": 0,
+            "estacionamientos": 0,
+            "direccion": "Avenida Principal 654",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 1000000,
+            "fecha_creacion": "2023-06-03",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "departamento",
+            "nombre": "Departamento con vista al mar",
+            "descripcion": "Hermoso departamento con vista panorámica al mar.",
+            "m2_construidos": 85,
+            "banos": 2,
+            "habitaciones": 3,
+            "estacionamientos": 1,
+            "direccion": "Calle Costanera 123",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 650000,
+            "fecha_creacion": "2023-06-02",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "casa",
+            "nombre": "Casa en condominio",
+            "descripcion": "Acogedora casa ubicada en condominio seguro.",
+            "m2_construidos": 150,
+            "banos": 3,
+            "habitaciones": 4,
+            "estacionamientos": 2,
+            "direccion": "Avenida Secundaria 987",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 1000000,
+            "fecha_creacion": "2023-06-01",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "parecela",
+            "nombre": "Oficina en edificio corporativo",
+            "descripcion": "Amplia oficina en moderno edificio corporativo.",
+            "m2_construidos": 100,
+            "banos": 2,
+            "habitaciones": 2,
+            "estacionamientos": 1,
+            "direccion": "Calle Comercial 456",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 800000,
+            "fecha_creacion": "2023-05-31",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "parecela",
+            "nombre": "Local en zona comercial",
+            "descripcion": "Amplio local comercial en zona de alto movimiento.",
+            "m2_construidos": 70,
+            "banos": 1,
+            "habitaciones": 0,
+            "estacionamientos": 0,
+            "direccion": "Avenida Principal 321",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 1100000,
+            "fecha_creacion": "2023-05-30",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "departamento",
+            "nombre": "Departamento con terraza",
+            "descripcion": "Luminoso departamento con amplia terraza.",
+            "m2_construidos": 70,
+            "banos": 1,
+            "habitaciones": 2,
+            "estacionamientos": 1,
+            "direccion": "Calle Residencial 654",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 550000,
+            "fecha_creacion": "2023-05-29",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "casa",
+            "nombre": "Casa con jardín",
+            "descripcion": "Encantadora casa con amplio jardín y terraza.",
+            "m2_construidos": 130,
+            "banos": 3,
+            "habitaciones": 4,
+            "estacionamientos": 2,
+            "direccion": "Avenida Secundaria 987",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 900000,
+            "fecha_creacion": "2023-05-28",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "parecela",
+            "nombre": "Oficina en zona financiera",
+            "descripcion": "Moderna oficina en el corazón de la zona financiera.",
+            "m2_construidos": 95,
+            "banos": 2,
+            "habitaciones": 2,
+            "estacionamientos": 1,
+            "direccion": "Calle Comercial 789",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 750000,
+            "fecha_creacion": "2023-05-27",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "parecela",
+            "nombre": "Local en strip center",
+            "descripcion": "Estratégico local comercial en concurrido strip center.",
+            "m2_construidos": 55,
+            "banos": 1,
+            "habitaciones": 0,
+            "estacionamientos": 0,
+            "direccion": "Avenida Principal 654",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 950000,
+            "fecha_creacion": "2023-05-26",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "departamento",
+            "nombre": "Departamento en edificio nuevo",
+            "descripcion": "Moderno departamento en edificio de reciente construcción.",
+            "m2_construidos": 80,
+            "banos": 2,
+            "habitaciones": 3,
+            "estacionamientos": 1,
+            "direccion": "Calle Residencial 123",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 600000,
+            "fecha_creacion": "2023-05-25",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "casa",
+            "nombre": "Casa en barrio tranquilo",
+            "descripcion": "Acogedora casa ubicada en un tranquilo barrio residencial.",
+            "m2_construidos": 110,
+            "banos": 2,
+            "habitaciones": 3,
+            "estacionamientos": 1,
+            "direccion": "Avenida Secundaria 321",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 850000,
+            "fecha_creacion": "2023-05-24",
+            "arrendador": 1
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "fields": {
+            "tipo_inmueble": "parecela",
+            "nombre": "Oficina en edificio inteligente",
+            "descripcion": "Oficina de alta tecnología en edificio inteligente.",
+            "m2_construidos": 85,
+            "banos": 1,
+            "habitaciones": 1,
+            "estacionamientos": 1,
+            "direccion": "Calle Comercial 456",
+            "imagen": "inmuebles/foto.jpg",
+            "comuna": 1,
+            "region": 1,
+            "precio": 700000,
+            "fecha_creacion": "2023-05-23",
+            "arrendador": 1
+        }
+    }
+]

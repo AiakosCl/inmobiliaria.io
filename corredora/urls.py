@@ -21,5 +21,15 @@ from django.conf import settings
 from web.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', index, name='inicio'),
+    path('preview-avosp/<uuid:id_publicacion>/', nuevo_aviso, name="PreviewAviso"),
+    path('nuevo_aviso/', nuevo_aviso, name="NuevoAviso"),
+    path('registro/', nuevo_usuario, name='NuevoUsuario'),
+    path('ficha/<int:usuario_id>/', vista_ficha, name='Ficha'),
+    path('usuarios/', lista_usuarios, name="ListaUsuarios" ),
+    path('editar-usuario/<int:usuario_id>/', editar_usuario, name='EditarUsuario'),
+    path('eliminar-usuario/<int:usuario_id>/', eliminar_usuario, name='EliminarUsuario'),
+    path('filtrousuarios/', filtrarUsuarios, name='FiltroUsuarios'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
