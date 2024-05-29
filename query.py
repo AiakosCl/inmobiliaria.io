@@ -1,6 +1,10 @@
 from django.db import connection
 import os, django
 
+#Estamos indicándole al archivo cuáll es el directorio raíz considerando la ubicación de este archivo
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+#Acá indicamos cuáles son los settings para el proyecto
 os.environ.setdefault("DJANGO_SETTINGS_MODULE","corredora.settings")
 django.setup()
 
@@ -21,12 +25,12 @@ def inmueblesComuna():
                 archivo.close()
                 with connection.cursor() as cursor:
                     sql = f"""
-                    SELECT web_inmueble.nombre AS nombre_inmueble, web_inmueble.descripcion AS descripcion_inmueble, web_region.nombre AS nombre_region
+                    SELECT web_inmueble.nombre AS nombre_inmueble, web_inmueble.descripcion AS descripcion_inmueble, web_comuna.nombre AS nombre_comuna
                     FROM web_inmueble
-                    INNER JOIN web_region ON web_inmueble.region_id = web_region.id
-                    GROUP BY web_inmueble.region_id, web_inmueble.nombre, web_inmueble.descripcion, web_region.nombre
-                    HAVING web_inmueble.region_id = {criterio} 
-                    ORDER BY web_inmueble.region_id ASC;
+                    INNER JOIN web_comuna ON web_inmueble.comuna_id = web_comuna.id
+                    GROUP BY web_inmueble.comuna_id, web_inmueble.nombre, web_inmueble.descripcion, web_comuna.nombre
+                    HAVING web_inmueble.comuna_id = {criterio} 
+                    ORDER BY web_inmueble.comuna_id ASC;
                     """
                     cursor.execute(sql)
                     inmuebles = cursor.fetchall()
@@ -36,6 +40,7 @@ def inmueblesComuna():
                     if not inmuebles:
                         with open("inmuebles-comuna.txt", "a", encoding="utf-8") as archivo:
                             archivo.write("\tSin inmuebles registrados en la Comuna\n")
+                        archivo.close()
                     else:
                         for inmueble in inmuebles:
                             with open("inmuebles-comuna.txt", "a", encoding="utf-8") as archivo:
@@ -75,13 +80,14 @@ def inmueblesRegion():
                     if not inmuebles:
                         with open("inmuebles-region.txt", "a", encoding="utf-8") as archivo:
                             archivo.write("\tSin inmuebles registrados en la Región\n")
+                        archivo.close()
                     else:
                         for inmueble in inmuebles:
                             with open("inmuebles-region.txt", "a", encoding="utf-8") as archivo:
                                 archivo.write("\t" + inmueble[0] + ", " + inmueble[1] +"\n")
                         archivo.close()
 
-def consultas():
 
-    inmueblesComuna()
-    inmueblesRegion()
+
+inmueblesComuna()
+inmueblesRegion()
