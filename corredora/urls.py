@@ -32,4 +32,5 @@ urlpatterns = [
     path('editar-usuario/<int:usuario_id>/', editar_usuario, name='EditarUsuario'),
     path('eliminar-usuario/<int:usuario_id>/', eliminar_usuario, name='EliminarUsuario'),
     path('filtrousuarios/', filtrarUsuarios, name='FiltroUsuarios'),
+    path('filtro/', filtrar, name='filtro'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

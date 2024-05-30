@@ -26,6 +26,7 @@ def index(request):
     inmuebles = Inmueble.objects.filter(estado_inmueble = 'disponible').order_by('-fecha_creacion')
     if request.user.is_authenticated and request.user.tipo_usuario == 'arrendador':
         inmuebles_arrendador = Inmueble.objects.filter(arrendador = request.user)
+        #Determina cuántos mensajes pendientes tiene el arrendador, relacionando los mensajes registrados en sus inmuebles.
         mensajes_pendientes = Mensajes.objects.filter(estado = 'pendiente', inmueble__in = inmuebles_arrendador).count()
     else:
         mensajes_pendientes = 0
@@ -166,3 +167,19 @@ def filtrarUsuarios(request):
         )
     
     return render(request, 'lista_usuarios.html',{'lista':usuarios})
+
+def filtrar(request):
+    criterio = request.GET.get('q')
+    inmuebles = Inmueble.objects.filter(estado_inmueble='disponible').order_by('-fecha_creacion')
+
+    if criterio:
+        seleccion = inmuebles.filter(
+                Q(comuna_id__nombre__icontains=criterio)|Q(region_id__nombre__icontains=criterio)
+            )
+
+        if not seleccion:
+            messages.error(request, f'{iconos["mal"]}\tNo se encontraron resultados para "{criterio}"')
+    else:
+        seleccion = inmuebles
+
+    return render(request, 'index.html', {'inmuebles':seleccion, 'seccion':'contenido'})
