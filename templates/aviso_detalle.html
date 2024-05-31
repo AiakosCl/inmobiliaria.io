@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+{% include "includes/preloader.html" %}
+
+<section id="contenido">
+    <div class="table-responsive">
+        <h2>Detalle de la Publicación</h2>
+        <table class="table table-sm align-middle" style="max-width:100%">
+            <thead>
+                <tr>
+                    <th>Imágen</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Tipo</th>
+                    <th>Comuna</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="{% if inmueble.imagen %}{{ inmueble.imagen.url }}{% else %}{% static 'images/cabecera2.jpg' %}{% endif %}" alt="{{ inmueble.nombre }}" class="rounded img-thumbnail" width="200px"></td>
+                    <td>{{ inmueble.nombre }}</td>
+                    <td><p>{{ inmueble.descripcion }}</p></td>
+                    <td><p>{{ inmueble.tipo_inmueble|title }}</p></td>
+                    <td>{{inmueble.comuna}}</td>
+                    <td class="text-end">$ {{ inmueble.precio|floatformat:'-3g' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'NuevoAviso' %}"><button type="button" class="btn btn-outline-dark btn-lg m-2">Nuevo Producto</button></a>
+    </div>
+</section>
+{% endblock %}

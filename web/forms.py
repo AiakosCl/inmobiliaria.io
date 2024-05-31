@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 class AvisoForm(forms.ModelForm):
     class Meta:
         model = Inmueble
-        fields = ['nombre', 'descripcion', 'm2_construidos', 'm2_totales', 'estacionamientos', 'habitaciones', 'banos', 'direccion', 'region', 'comuna', 'tipo_inmueble', 'precio']
+        fields = ['nombre', 'descripcion', 'm2_construidos', 'm2_totales', 'estacionamientos', 'habitaciones', 'banos', 'direccion', 'region', 'comuna', 'tipo_inmueble', 'precio','imagen','visitas']
         labels = {
             'nombre': 'Título de la publicación:',
             'descripcion': 'Descripción del Inmueble:',
@@ -20,6 +20,8 @@ class AvisoForm(forms.ModelForm):
             'comuna': 'Comuna:',
             'tipo_inmueble': 'Tipo de Inmueble:',
             'precio': 'Precio',
+            'imagen': 'Fotografía de la propiedad:',
+            'visitas': 'Cantidad de visualizaciones:',
         }
 
         error_messages ={
@@ -65,8 +67,8 @@ class AvisoForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
-        aviso = super().save(commit=True)
-        aviso.arrendador = self.request.user
+        aviso = super().save(commit=False)
+        aviso.arrendador_id = self.request.user.id
         aviso.estado_inmueble = 'disponible'
         if commit:
             aviso.save()

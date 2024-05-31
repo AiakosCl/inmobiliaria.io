@@ -105,7 +105,6 @@ p {
 }
 
 img {
-  width: 100%;
   overflow: hidden;
 }
 
@@ -130,7 +129,7 @@ body {
 }
 
 .section {
-  margin-top: 120px;
+  margin-top: 0;
 }
 
 .section-heading {
@@ -1061,7 +1060,7 @@ Best Deal Style
 
 .best-deal {
   background-color: #fafafa;
-  padding: 100px 0px;
+  padding: 10px 0px;
 }
 
 .best-deal .tab-content img {
@@ -1102,12 +1101,12 @@ Best Deal Style
 .best-deal .info-table {
   border-radius: 10px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
-  padding: 35px 30px;
+  padding: 0px 0px;
 }
 
 .best-deal .info-table ul li {
   display: block;
-  margin-bottom: 24px;
+  margin-bottom: 0px;
   padding-bottom: 24px;
   border-bottom: 1px solid #eee;
   text-align: left;
@@ -1512,7 +1511,7 @@ Single Page Style
 }
 
 .single-property .accordion {
-  margin-top: 60px;
+  margin-top: 0px;
   margin-left: 0px;
   margin-right: 0px;
   --bs-accordion-border-radius: 10px;
@@ -1520,6 +1519,8 @@ Single Page Style
   --bs-accordion-bg: #fafafa;
   --bs-accordion-border-color: none;
   border: none !important;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
 }
 
 .single-property .accordion-header {
@@ -1554,14 +1555,14 @@ Single Page Style
 .single-property .info-table {
   border-radius: 10px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
-  padding: 35px 30px;
-  margin-left: 60px;
+  padding: 30px 30px;
+  margin-left: 0px;
 }
 
 .single-property .info-table ul li {
   display: block;
-  margin-bottom: 35px;
-  padding-bottom: 35px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #eee;
 }
 

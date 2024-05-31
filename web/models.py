@@ -58,7 +58,8 @@ class Inmueble(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     arrendador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     fecha_creacion= models.DateField(auto_now_add=True)
-    imagen = models.ImageField(upload_to='inmuebles', null=True, blank=True)
+    imagen = models.ImageField(upload_to='inmuebles/', null=True, blank=True)
+    visitas = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.nombre

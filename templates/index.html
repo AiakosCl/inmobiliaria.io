@@ -24,11 +24,14 @@
                 </li>
             </ul>
             <h2>{% include "includes/mensajes.html" %}</h2>
-            <div class="properties-box slick-list draggable">
+            
+            <div class="properties-box">
                 {% for inmueble in inmuebles %}
                 <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 {% if inmueble.tipo_inmueble == 'casa' %}casa{% elif inmueble.tipo_inmueble == 'departamento' %}depto{% else %}parc{% endif %}">
                     <div class="item">
-                        <a href="#!"><img src="{% if inmueble.imagen %}{{ inmueble.imagen.url }}{% else %}{% static 'images/cabecera2.jpg' %}{% endif %}" alt="" sytle="max-width: 234px; width: 100%;"></a>
+                        <div class="image-container">
+                            <a href="{% url 'VistaAviso' inmueble.id_publicacion %}#presentacion"><img src="{% if inmueble.imagen %}{{ inmueble.imagen.url }}{% else %}{% static 'images/cabecera2.jpg' %}{% endif %}" alt=""></a>
+                        </div>
                         <span class="category">{{ inmueble.tipo_inmueble|title }}</span>
                         <h6 class="price">$ {{ inmueble.precio|floatformat:'-3g'}}</h6>
                         <h6>{{ inmueble.comuna }}</h6>
@@ -38,27 +41,28 @@
                             <li>Baños: <span>{{inmueble.banos}}</span></li>
                             <li>Área: <span>{{inmueble.m2_construidos}} m&sup2; / {% if inmueble.m2_totales %}{{inmueble.m2_totales}} m&sup2;{% else %}0{% endif %}</span></li>
                             <li>Estacionamientos: <span>{{inmueble.estacionamientos}}</span></li>
+                            <li><span><i class="fa-regular fa-eye"></i>: {{inmueble.visitas|floatformat:'-3g'}} vistas</span></li>
                         </ul>
                         <div class="main-button">
-                            <a href="#!">Agenda una visita</a>
+                            <a href="{% url 'VistaAviso' inmueble.id_publicacion %}#presentacion">Agenda una visita</a>
                         </div>
                     </div>
                 </div>
                 {% empty %}
-                <h2 style="width: 100%;"><i class="fa-solid fa-heart-crack"></i> Ups! No encuentro lo que buscas</h2>
+                <h2 class="text-center" style="width: 100%;"><i class="fa-solid fa-heart-crack"></i> Ups! No encuentro lo que buscas</h2>
                 {% endfor %}
             </div>
         </div>
     </div>
 </section>
 
-<script>
+<!-- <script>
     $(document).ready(function () {
         $('.properties-box').slick({
             draggable: true,
             // Otras opciones de configuración de Slick Carousel
         });
     });
-</script>
+</script> -->
 
 {% endblock %}

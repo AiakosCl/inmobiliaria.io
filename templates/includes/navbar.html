@@ -32,7 +32,7 @@
                             <span>Arrendador</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item menu" href="{% url 'NuevoAviso' %}#aviso"><i class="fa-solid fa-file-lines"></i> Nueva publicación</a></li>
+                            <li><a class="dropdown-item menu" href="{% url 'NuevoAviso' %}#contenido"><i class="fa-solid fa-file-lines"></i> Nueva publicación</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item menu" href="#" target="_blank"><i class="fa-regular fa-envelope" {% if mensajes_pendientes > 0 %} style="color: #f35525" {% else %} style="color: #06bb66" {% endif %}></i> Ver mensajes</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -75,6 +75,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
+                            <li><a class="dropdown-item menu" href="{% url 'ListaAvisos' %}"><i class="fa-solid fa-list-ol"></i> Lista publicaciones</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-arrow-up"></i> Cargas masivas</a></li>
                             <li>
                                 <hr class="dropdown-divider">

@@ -6,11 +6,8 @@
             <div class="d-flex h-100">
                 <div class="text-white">
                     <img src="{% static 'images/Logo2-transparent.png' %}" alt="" width="200px">
-                    {% if user.is_authenticated %}
-                    <h2 class="mb-3 fs-1">Bienvenido, {{user.first_name}}</h1>
-                    {% endif %}
-                        <h3 class="mb-4">Más que una casa, un hogar.
-                    </h2>
+                    {% if user.is_authenticated %}<h2 class="mb-3 fw-1">Bienvenido, {{user.first_name}}</h2>{% endif %}
+                        <h3 class="mb-4">Más que una casa, un hogar.</h3>
                     <a data-mdb-ripple-init class="btn btn-outline-light btn-lg m-2"
                         href="#" role="button" rel="nofollow">Acerca de</a>
                     <button type="button" class="btn btn-outline-light btn-lg m-2" data-bs-toggle="modal"

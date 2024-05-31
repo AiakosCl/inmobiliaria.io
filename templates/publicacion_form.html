@@ -13,8 +13,8 @@
         <div class="modal-dialog modal-lg" >
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title">Nueva Publicación</h1>
-                    <a href="{% url 'inicio' %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                    <h1 class="modal-title">{% if es_edicion %}Editar Publicación{% else %}Nueva Publicación{% endif %}</h1>
+                    <a href="{% if es_edicion %}{% url 'ListaAvisos' %}#avisos{% else %}{% url 'inicio' %}{% endif %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
                 </div>
                 <!-- barra de mensajes -->
                 {% include "includes/mensajes.html" %}
@@ -36,25 +36,50 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="region" name="region" placeholder="Ingrese la región..." value="{{ formulario.region.value|default_if_none:'' }}">
-                            <label for="region" class="form-label">{{formulario.region.label}}</label>
-                            {% if formulario.region.errors %}<span class="form_error rounded">{{formulario.region.errors}}</span>{% endif %}
-                        </div>
-                        
-
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="comuna" name="comuna" placeholder="Ingrese la comuna..." value="{{ formulario.comuna.value|default_if_none:'' }}">
-                            <label for="comuna" class="form-label">{{formulario.comuna.label}}</label>
-                            {% if formulario.comuna.errors %}<span class="form_error rounded">{{formulario.comuna.errors}}</span>{% endif %}
-                        </div>
-                        <div></div>
-
-                        <div class="form-floating mb-3">
-                            <textarea type="text" class="form-control" id="id_DescProducto" name="descripcion" rows="3" placeholder="Escriba una reseña del producto..." value="{{ formulario.descripcion.value|default_if_none:'' }}"></textarea>
+                            <textarea type="text" class="form-control" id="id_DescProducto" name="descripcion" rows="5" placeholder="Escriba una reseña del producto..." >{{ formulario.descripcion.value|default_if_none:'' }}</textarea>
                             <label for="id_DescProducto" class="form-label">{{formulario.descripcion.label}}</label>
                             {% if formulario.descripcion.errors %}<span class="form_error rounded">{{formulario.descripcion.errors}}</span>{% endif %}
                         </div>
 
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="region" name="region" required>
+                                            {% if es_edicion %}
+                                            {% for region in regiones %}
+                                            <option value="{{ region.id }}" {% if formulario.region.value == region.id %}selected{% endif %}>{{ region }}</option>
+                                            {% endfor %}
+                                            {% else %}
+                                            <option value="">Seleccione una región</option>
+                                            {% for region in regiones %}
+                                            <option value="{{ region.id }}">{{ region }}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                        <label for="region" class="form-label">{{formulario.region.label}}</label>
+                                        {% if formulario.region.errors %}<span class="form_error rounded">{{formulario.region.errors}}</span>{% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="comuna" name="comuna" required>
+                                            {% if es_edicion %}
+                                            {% for comuna in comunas %}
+                                            <option value="{{ comuna.id }}" {% if formulario.comuna.value == comuna.id %}selected{% endif %}>{{ comuna }}</option>
+                                            {% endfor %}
+                                            {% else %}
+                                            <option value="">Seleccione la comuna</option>
+                                            {% endif %}
+                                        </select>
+                                        <label for="comuna" class="form-label">Comuna:</label>
+                                        {% if formulario.comuna.errors %}<span class="form_error rounded">{{formulario.comuna.errors}}</span>{% endif %}
+                                    </div>                                    
+                                </td>
+                            </tr>
+                        </table>
+                        
                         <table>
                             <tr>
                                 <td>
@@ -125,7 +150,7 @@
                                 <td>
                                     <div class="mb-3">
                                         <label for="id_ImagenProducto" class="form-label">Imagen del producto:</label>
-                                        <input type="file" class="form-control" id="id_ImagenProducto" name="imagen" placeholder="Seleccione el archivo" value="{{ formulario.imagen.value|default_if_none:'' }}">
+                                        <input type="file" class="form-control" id="id_ImagenProducto" name="imagen" placeholder="Seleccione el archivo">
                                         {% if formulario.imagen.errors %}<span class="form_error rounded">{{formulario.imagen.errors}}</span>{% endif %}
                                     </div>
                                 </td>
@@ -149,6 +174,30 @@
     document.addEventListener('DOMContentLoaded', function() {
         var nuevoProductoModal = new bootstrap.Modal(document.getElementById('nuevoProductoModal'));
         nuevoProductoModal.show();
+    });
+</script>
+<script>
+    document.getElementById('region').addEventListener('change', function() {
+        var regionId = this.value;
+        var comunaSelect = document.getElementById('comuna');
+        comunaSelect.innerHTML = '<option value="">Seleccione una comuna</option>';
+        comunaSelect.disabled = true;
+        
+        if (regionId) {
+            fetch(`/obtener-comunas/${regionId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    comunaSelect.innerHTML = '<option value="">Seleccione una comuna</option>';
+                    data.forEach(function(comuna) {
+                        var option = document.createElement('option');
+                        option.value = comuna.id;
+                        option.textContent = comuna.nombre;
+                        comunaSelect.appendChild(option);
+                    });
+                    comunaSelect.disabled = false;
+                    comunaSelect.dataset.regionId = regionId;
+                });
+        }
     });
 </script>
 {% endblock %}
