@@ -50,14 +50,53 @@ html {
     font-size: 14px;
 }
 
+
 #Cabecera {
-    background-image: url('../images/banner-02.jpg');
-    background-size: cover;
+    position: relative;
+}
+
+.carousel {
+    position: relative;
+    z-index: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%, -50%);
+    z-index: 2;
+    text-align: left;
+}
+
+.overlay img {
+    width: 200px; /* Ajusta el tamaño del logo según tus necesidades */
+}
+
+.overlay h1 {
+    color: white; /* Ajusta el color del texto según tus necesidades */
+    font-size: 24px; /* Ajusta el tamaño del texto según tus necesidades */
 }
 
 #Cabecera h2,
 h3 {
     color: white;
+}
+
+.circular-images {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.properties-items .item .circular-images {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
 }
 
 .properties-items .item img {
@@ -92,6 +131,7 @@ h3 {
     padding: 5px 10px;
     font-size: 16px;
     font-weight: bold;
+    border-radius: 5px;
 }
 
 .item .image-container {

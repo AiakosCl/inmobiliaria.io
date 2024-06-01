@@ -38,10 +38,10 @@
                     {% for aviso in avisos %}
                     <tr>
                         <td>
-                            <img src="{% if aviso.imagen %}{{ aviso.imagen.url }}{% else %}{% static 'images/cabecera2.jpg' %}{% endif %}" alt="{{ aviso.nombre }}" class="rounded img-thumbnail" width="200px">
+                            <img src="{% if aviso.imagen %}{{ aviso.imagen.url }}{% else %}{% static 'images/cabecera2.jpg' %}{% endif %}" alt="{{ aviso.nombre }}" class="circular-images">
                         </td>
                         <td>{{ aviso.nombre }}</td>
-                        <td>{{ aviso.arrendador_id.last_name}}, {{ aviso.arrendador_id.first_name }}</td>
+                        <td>{{ aviso.arrendador.last_name}}, {{ aviso.arrendador.first_name }}</td>
                         <td>{{ aviso.comuna }}</td>
                         <td class="text-end">{{ aviso.precio|floatformat:'-3g' }}</td>
                         <td>{{ aviso.estado_inmueble }}</td>

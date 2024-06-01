@@ -97,6 +97,7 @@ def editar_aviso(request, aviso_id):
     es_edicion = True
     if request.method == 'POST':
         formulario = AvisoForm(request.POST, request.FILES, instance=inmueble, request=request)
+        print(formulario)
         if formulario.is_valid():
             formulario.save()
             messages.success(request, f'{iconos["ok"]}\tSe ha editado la publicación.')
@@ -169,8 +170,9 @@ def filtraravisos(request):
                 Q(nombre__icontains=criterio)|Q(arrendador_id__first_name__icontains=criterio)|Q(arrendador_id__last_name__icontains=criterio)|
                 Q(estado_inmueble__icontains=criterio)
             )
-        if not avisos:
-            messages.error(request, f'{iconos["mal"]}\tUPS!No se encontraron resultados para "{criterio}"')
+    else:
+        pass
+
     
     return render(request, 'lista_avisos.html', {'avisos':avisos, 'seccion':'avisos'})
 

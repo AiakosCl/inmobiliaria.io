@@ -4,24 +4,24 @@
 {% block contenido %}
 
 <section class="presentacion">
-  {% include "includes/preloader.html" %}
-
-  <div class="modal fade" id="nuevoProductoModal" tabindex="-1" aria-labelledby="nuevoProductoModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content bg-light">
+  <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="nuevoProductoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content bg-light" style="width: 100%;">
         <div class="modal-header">
           <h1 class="modal-title text-dark">Sobre la propiedad</h1>
           <a href="{% url 'inicio' %}#contenido"><button type="button" class="btn-close" data-bs-dismiss="modal"
-              aria-label="Close"></button></a>
+              aria-label="Close"></button>
+          </a>
         </div>
         <div class="modal-body">
           <div class="single-property section">
             <div class="container">
               <div class="row">
-                <div class="col-12 col-md-8">
-                  <div class="image-container" style="overflow: hidden; width: 100%; height: auto;">
-                    <img src="{% if inmueble.imagen %}{{ inmueble.imagen.url }}{% else %}{% static 'images/cabecera2.jpg' %}{% endif %}" class="img-fluid img-thumbnail" alt="" width="100%" height="100%">
+                <div class="col-md-8">
+                  <div class="image-container col-12" style="overflow: hidden; width: auto; height: 500px;">
+                    <img
+                      src="{% if inmueble.imagen %}{{ inmueble.imagen.url }}{% else %}{% static 'images/cabecera2.jpg' %}{% endif %}"
+                      class="img-fluid img-thumbnail" alt="" width="100%" height="100%">
                   </div>
                   <div class="main-content">
                     <span class="category">{{inmueble.tipo_inmueble|title}}</span>
@@ -37,7 +37,7 @@
                         <li>Visitas: <span>{{inmueble.visitas|floatformat:'-3g'}}</span></li>
                       </ul>
                     </div>
-                  </div> 
+                  </div>
                   <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                       <h2 class="accordion-header" id="headingOne">
@@ -83,8 +83,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-4">
-                  <div class="info-table">
+                <div class="col-md-4">
+                  <div class="info-table mt-4">
                     <ul>
                       <li>
                         <img src="{% static 'images/info-icon-01.png' %}" alt="" style="max-width: 52px;">
@@ -103,31 +103,29 @@
                         <h4>Seguridad<br><span>24/7 Seguridad</span></h4>
                       </li>
                     </ul>
+                    {% if request.user.is_authenticated and request.user.tipo_usuario == 'arrendador' %}
+                    <a data-mdb-ripple-init class="btn btn-outline-dark btn-lg m-2" href="{% url 'EditarAviso' inmueble.id_publicacion %}" role="button"
+                                rel="nofollow">Editar Publicación</a>
+                    {% else %}
+                    <a data-mdb-ripple-init class="btn btn-outline-dark btn-lg m-2" href="#" role="button"
+                                rel="nofollow">Solicitar Arriendo</a>
+                    {% endif %}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark btn-lg m-2">Solicitar Arriendo</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 <!-- Script para activar Modal cuando se cargue la página -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var nuevoProductoModal = new bootstrap.Modal(document.getElementById('nuevoProductoModal'));
+    var nuevoProductoModal = new bootstrap.Modal(document.getElementById('Modal'));
     nuevoProductoModal.show();
   });
 </script>
 {% endblock %}
-
-
-
-
-
-
-

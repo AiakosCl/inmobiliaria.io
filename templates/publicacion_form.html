@@ -9,12 +9,12 @@
 </section>
 
 <!-- Modal -->
-    <div class="modal fade" id="nuevoProductoModal" tabindex="-1" aria-labelledby="nuevoProductoModalLabel" aria-hidden="true" style="background-color: rgba(255,255,255,0.7);">
+    <div class="modal fade" id="ProductoModal" tabindex="-1" aria-labelledby="ProductoModalLabel" aria-hidden="true" style="background-color: rgba(255,255,255,0.7);">
         <div class="modal-dialog modal-lg" >
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title">{% if es_edicion %}Editar Publicación{% else %}Nueva Publicación{% endif %}</h1>
-                    <a href="{% if es_edicion %}{% url 'ListaAvisos' %}#avisos{% else %}{% url 'inicio' %}{% endif %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                    <a href="{% if user.is_staff %}{% url 'ListaAvisos' %}#avisos{% else %}{% url 'inicio' %}{% endif %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
                 </div>
                 <!-- barra de mensajes -->
                 {% include "includes/mensajes.html" %}
@@ -134,15 +134,15 @@
                                     <div class="mb-3">
                                         <label for="tipo" class="form-label">{{formulario.tipo_inmueble.label}}</label>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" name="tipo_inmueble" id="departamento" value = "departamento" {% if formulario.tipo_inmueble.value %}checked{% endif %}>
+                                            <input type="radio" class="form-check-input" name="tipo_inmueble" id="departamento" value = "departamento" {% if formulario.tipo_inmueble.value == 'departamento' %}checked{% endif %}>
                                             <label class="form-check-label" for="departamento">Departamento</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" name="tipo_inmueble" id="casa" value = "casa" {% if formulario.tipo_inmueble.value %}checked{% endif %}>
+                                            <input type="radio" class="form-check-input" name="tipo_inmueble" id="casa" value = "casa" {% if formulario.tipo_inmueble.value == 'casa' %}checked{% endif %}>
                                             <label class="form-check-label" for="casa">Casa</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" name="tipo_inmueble" id="parcela" value = "parcela" {% if formulario.tipo_inmueble.value %}checked{% endif %}>
+                                            <input type="radio" class="form-check-input" name="tipo_inmueble" id="parcela" value = "parcela" {% if formulario.tipo_inmueble.value == 'parcela' %}checked{% endif %}>
                                             <label class="form-check-label" for="parcela">Parcela</label>
                                         </div>
                                     </div>
@@ -172,10 +172,12 @@
 <!-- Script para activar Modal cuando se cargue la página -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var nuevoProductoModal = new bootstrap.Modal(document.getElementById('nuevoProductoModal'));
-        nuevoProductoModal.show();
+        var ProductoModal = new bootstrap.Modal(document.getElementById('ProductoModal'));
+        var URLprevio=window.location.href
+        ProductoModal.show();
     });
 </script>
+
 <script>
     document.getElementById('region').addEventListener('change', function() {
         var regionId = this.value;
