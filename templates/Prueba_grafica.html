@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba gráfica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Dashboard Arrendador</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div style="height: 200px;">
+                <h2>Ocupación</h2>
+                <canvas id="ocupacionChart"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div style="height: 200px;">
+                <h2>Proyección de Remesa</h2>
+                <canvas id="remesaChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script>
+        // Datos desde el contexto de Django
+        const ocupacion = 75;
+        const totalArriendos = 75;
+        
+        // Configuración de la gráfica de ocupación
+        const ctxOcupacion = document.getElementById('ocupacionChart').getContext('2d');
+        const ocupacionChart = new Chart(ctxOcupacion, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ocupados', 'Disponibles'],
+                datasets: [{
+                    data: [ocupacion, 100 - ocupacion],
+                    backgroundColor: ['#06bb669f', '#f355259f']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+
+        // Configuración de la gráfica de proyección de remesa
+        const ctxRemesa = document.getElementById('remesaChart').getContext('2d');
+        const remesaChart = new Chart(ctxRemesa, {
+            type: 'bar',
+            data: {
+                labels: ['Proyección de Remesa'],
+                datasets: [{
+                    label: 'Total Arriendos',
+                    data: [totalArriendos],
+                    backgroundColor: ['#4bc0c0']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
