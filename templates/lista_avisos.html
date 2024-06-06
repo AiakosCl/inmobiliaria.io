@@ -46,8 +46,8 @@
                         <td class="text-end">{{ aviso.precio|floatformat:'-3g' }}</td>
                         <td>{{ aviso.estado_inmueble }}</td>
                         <td>
-                            <a href="{% url 'EditarAviso' aviso.id_publicacion %}"><i class="fa-solid fa-pen-to-square fs-3"></i></a>
-                            <a href="{% url 'EliminarAviso' aviso.id_publicacion %}"><i class="fa-solid fa-trash-can fs-3"></i></a>
+                            <a href="{% url 'EditarAviso' aviso.id_publicacion %}#avisos"><i class="fa-solid fa-pen-to-square fs-3"></i></a>
+                            <a href="{% url 'EliminarAviso' aviso.id_publicacion %}#avisos"><i class="fa-solid fa-trash-can fs-3"></i></a>
                         </td>
                     </tr>
                     {% empty %}

@@ -10,11 +10,12 @@
 
 <!-- Modal -->
     <div class="modal fade" id="ProductoModal" tabindex="-1" aria-labelledby="ProductoModalLabel" aria-hidden="true" style="background-color: rgba(255,255,255,0.7);">
+        <input type="hidden" name="next" value="{{ next }}">
         <div class="modal-dialog modal-lg" >
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title">{% if es_edicion %}Editar Publicación{% else %}Nueva Publicación{% endif %}</h1>
-                    <a href="{% if user.is_staff %}{% url 'ListaAvisos' %}#avisos{% else %}{% url 'inicio' %}{% endif %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                    <a href="{% if user.is_staff %}{{ request.META.HTTP_REFERER }}#avisos{% else %}{% url 'Dashboard' %}#avisos{% endif %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
                 </div>
                 <!-- barra de mensajes -->
                 {% include "includes/mensajes.html" %}
@@ -155,11 +156,27 @@
                                     </div>
                                 </td>
                             </tr>
+                            {% if es_edicion %}
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="estado" name="estado_inmueble" required>
+                                            <option value="disponible" {% if formulario.estado_inmueble.value == 'disponible' %}selected{% endif %}>Disponible</option>
+                                            <option value="reservado" {% if formulario.estado_inmueble.value == 'reservado' %}selected{% endif %}>Reservado</option>
+                                            <option value="arrendado" {% if formulario.estado_inmueble.value == 'arrendado' %}selected{% endif %}>Arrendado</option>
+                                        </select>
+                                        <label for="estado" class="form-label">Estado del Inmueble:</label>
+                                        {% if formulario.estado_inmueble.errors %}<span class="form_error rounded">{{formulario.estado_inmueble.errors}}</span>{% endif %}
+                                    </div>  
+                                </td>
+                            </tr>
+                            {% endif %}
                         </table>
 
                         <!-- Cómo utilizar los botones de radio para seleccionar un booleando -->
                         <div class="modal-footer">
-                            <a href="{% url 'inicio' %}"><button type="button" class="btn btn-outline-danger btn-lg m-2 cancelar" data-bs-dismiss="modal" style="width: 100px;"><i class="fa-solid fa-xmark fs-2"></i></button></a>
+                            <a href="{{ request.META.HTTP_REFERER }}"><button type="button" class="btn btn-outline-danger btn-lg m-2 cancelar" data-bs-dismiss="modal" style="width: 100px;"><i class="fa-solid fa-xmark fs-2"></i></button></a>
                             <button type="submit" class="btn btn-outline-success btn-lg m-2 aceptar" style="width: 100px;"><i class="fa-solid fa-check fs-2"></i></button>
                         </div>
                     </form>

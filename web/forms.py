@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 class AvisoForm(forms.ModelForm):
     class Meta:
         model = Inmueble
-        fields = ['nombre', 'descripcion', 'm2_construidos', 'm2_totales', 'estacionamientos', 'habitaciones', 'banos', 'direccion', 'region', 'comuna', 'tipo_inmueble', 'precio','imagen','visitas']
+        fields = ['nombre', 'descripcion', 'm2_construidos', 'm2_totales', 'estacionamientos', 'habitaciones', 'banos', 'direccion', 'region', 'comuna', 'tipo_inmueble', 'estado_inmueble','precio','imagen','visitas']
         labels = {
             'nombre': 'Título de la publicación:',
             'descripcion': 'Descripción del Inmueble:',
@@ -19,6 +19,7 @@ class AvisoForm(forms.ModelForm):
             'region': 'Región:',
             'comuna': 'Comuna:',
             'tipo_inmueble': 'Tipo de Inmueble:',
+            'estado_inmueble': 'Estado disponibilidad:',
             'precio': 'Precio',
             'imagen': 'Fotografía de la propiedad:',
             'visitas': 'Cantidad de visualizaciones:',
@@ -69,7 +70,6 @@ class AvisoForm(forms.ModelForm):
     def save(self, commit=True):
         aviso = super().save(commit=False)
         aviso.arrendador_id = self.request.user.id
-        aviso.estado_inmueble = 'disponible'
         if commit:
             aviso.save()
         return aviso
@@ -158,75 +158,19 @@ class NuevoUsuarioForm(UserCreationForm):
 #         }
 
 
-class UsuarioForm(forms.ModelForm):
-    password = forms.CharField(label='Contraseña', widget=forms.PasswordInput, required=False)
-    confirm_password = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput, required=False)
+# forms.py
 
+class EditarUsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['first_name', 'last_name', 'email', 'telefono', 'direccion', 'rut', 'tipo_usuario', 'is_staff', 'is_active']
-        labels = {
-            'first_name': 'Nombre',
-            'last_name': 'Apellido',
-            'email': 'Correo Electrónico',
-            'telefono': 'Teléfono',
-            'direccion': 'Dirección',
-            'rut': 'RUT',
-            'tipo_usuario': 'Tipo de Usuario',
-            'is_staff': '¿Es miembro del Staff?',
-            'is_active': '¿Está activo?',
-        }
-        widgets = {
-            'tipo_usuario': forms.Select(choices=Usuario.TIPO_USUARIO),
-            'is_staff': forms.CheckboxInput(),
-            'is_active': forms.CheckboxInput(),
-        }
-        error_messages = {
-            'first_name': {
-                'required': 'El campo Nombre es obligatorio.',
-                'max_length': 'El Nombre no puede tener más de 30 caracteres.',
-            },
-            'last_name': {
-                'required': 'El campo Apellido es obligatorio.',
-                'max_length': 'El Apellido no puede tener más de 30 caracteres.',
-            },
-            'email': {
-                'required': 'El campo Correo Electrónico es obligatorio.',
-                'invalid': 'Ingrese un Correo Electrónico válido.',
-                'unique': 'Este Correo Electrónico ya está en uso.',
-            },
-            'telefono': {
-                'required': 'El campo Teléfono es obligatorio.',
-                'max_length': 'El Teléfono no puede tener más de 20 caracteres.',
-            },
-            'direccion': {
-                'required': 'El campo Dirección es obligatorio.',
-                'max_length': 'La Dirección no puede tener más de 255 caracteres.',
-            },
-            'rut': {
-                'required': 'El campo RUT es obligatorio.',
-                'unique': 'Este RUT ya está en uso.',
-                'max_length': 'El RUT no puede tener más de 9 caracteres.',
-            },
-            'tipo_usuario': {
-                'required': 'El campo Tipo de Usuario es obligatorio.',
-                'invalid_choice': 'Seleccione un Tipo de Usuario válido.',
-            },
-        }
 
-    def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get('password')
-        confirm_password = cleaned_data.get('confirm_password')
-
-        if password and confirm_password and password != confirm_password:
-            raise forms.ValidationError("Las contraseñas no coinciden.")
+    password = forms.CharField(required=False, widget=forms.PasswordInput, help_text='Dejar en blanco para no cambiar.')
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        password = self.cleaned_data.get('password')
-        if password:
-            user.set_password(password)
+        if self.cleaned_data['password']:
+            user.set_password(self.cleaned_data['password'])
         if commit:
             user.save()
         return user

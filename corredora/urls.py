@@ -33,6 +33,7 @@ urlpatterns = [
     path('aviso/<uuid:id_publicacion>/', vista_aviso, name="VistaAviso"),
     path('registro/', nuevo_usuario, name='NuevoUsuario'),
     path('ficha/<int:usuario_id>/', vista_ficha, name='Ficha'),
+    path('dashboard/', dashboard_arrendador, name='Dashboard'),
     path('usuarios/', lista_usuarios, name="ListaUsuarios" ),
     path('editar-usuario/<int:usuario_id>/', editar_usuario, name='EditarUsuario'),
     path('eliminar-usuario/<int:usuario_id>/', eliminar_usuario, name='EliminarUsuario'),

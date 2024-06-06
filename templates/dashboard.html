@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary mt-2">
+    <div class="container-fluid">
+        <a href="{% url 'Dashboard' %}" class="text-decoration-none text-dark">
+            <h1>Dashboard {{ user.first_name }}</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent3"
+            aria-controls="navbarSupportedContent3" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent3">
+            <form class="d-flex ms-auto me-0" role="search" action="#" method="GET">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="q">
+                <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+    </div>
+</nav>
+{% include "includes/preloader.html" %}
+<section id="avisos">
+    <div class="row single-property section">
+        <div class="section best-deal info-table col-md-4"style="height:350px;">
+            <ul>
+            <li>m&sup2; construidos <span>{{inmueble.m2_construidos}} m&sup2;</span></li>
+            <li>Habitaciones <span>{{inmueble.habitaciones}}</span></li>
+            <li>Baños <span>3</span>{{inmueble.banos}}</li>
+            <li>Estacionamientos: <span>{{inmueble.estacionamientos}}</span></li>
+            <li>Visitas: <span>{{inmueble.visitas|floatformat:'-3g'}}</span></li>
+            </ul>
+        </div>
+
+        <div class="col-md-4 info-table" style="height:350px;">
+            <h2>Ingresos:</h2>
+            <canvas id="ingresosChart" width="200" height="200" class="mb-3"></canvas>
+        </div>
+        <div class="col-md-4">
+            <h2>Acá vendrá otra cosita</h2>
+        </div>
+    </div>
+    <hr>
+    <div class="row single-property section" style="width: 100%!important;">
+        <div class="col-md-4 info-table" style="width:400px; height:400px;">
+            <h2>Ocupación</h2>
+            <canvas id="ocupacionChart" class="mb-3"></canvas>
+        </div>
+        <div class="rounded-3 info-table col-md-8" style="max-width: 100%;">
+            <div id="table-responsiv" style="max-width:100%;max-height: 700px;overflow-y: auto;">
+                <table class="table table-lg align-middle" style="max-width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Titulo</th>
+                            <th>Dirección</th>
+                            <th>Comuna</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% csrf_token %}
+                        {% for inmueble in inmuebles %}
+                        <tr>
+                            <td>
+                                <img src="{% if inmueble.imagen %}{{ inmueble.imagen.url }}{% else %}{% static 'images/cabecera2.jpg' %}{% endif %}"
+                                    alt="{{ inmueble.nombre }}" class="circular-images">
+                            </td>
+                            <td>{{ inmueble.nombre }}</td>
+                            <td>{{ inmueble.direccion }}</td>
+                            <td>{{ inmueble.comuna }}</td>
+                            <td class="text-end">{{ inmueble.precio|floatformat:'-3g' }}</td>
+                            <td>{{ inmueble.estado_inmueble }}</td>
+                            <td>
+                                <a href="{% url 'EditarAviso' inmueble.id_publicacion %}?next={{ request.path }}"><i
+                                        class="fa-solid fa-pen-to-square fs-3"></i></a>
+                                <a href="{% url 'EliminarAviso' inmueble.id_publicacion %}?next={{ request.path }}"><i
+                                        class="fa-solid fa-trash-can fs-3"></i></a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <h2 class="text-center" style="width: 100%;"><i class="fa-regular fa-face-frown-open"></i> Ups!
+                            No encuentro lo que buscas</h2>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{% url 'NuevoAviso' %}"><button type="button" class="btn btn-outline-dark btn-lg m-2">Nueva
+                    publicación</button>
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Datos desde el contexto de Django
+        const ocupacion = {{ ocupacion|safe }};
+        const totalArriendos = {{ cobro_total|safe }};
+        const TotalPublicaciones = {{ total|safe }};
+        const inmuebles_disponibles = {{ inmuebles_disponibles|safe }};
+        const inmuebles_arrendados = {{ inmuebles_arrendados|safe }};
+        
+        // Verificar la presencia de datos en la consola
+        console.log(ocupacion, totalArriendos, inmuebles_disponibles, inmuebles_arrendados);
+    
+        // Configuración de la gráfica de ocupación
+        const ctxOcupacion = document.getElementById('ocupacionChart').getContext('2d');
+        const ocupacionChart = new Chart(ctxOcupacion, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ocupados', 'Disponibles'],
+                datasets: [{
+                    data: [ocupacion, 100 - ocupacion],
+                    backgroundColor: ['#06bb669f', '#f355259f']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+
+        // Configuración de la gráfica de ingresos
+        const ctxIngresos = document.getElementById('ingresosChart').getContext('2d');
+        const ingresosChart = new Chart(ctxIngresos, {
+            type: 'bar',
+            data: {
+                labels: ['Arriendos', 'Publicados'],
+                datasets: [{
+                    data: [totalArriendos, TotalPublicaciones],
+                    backgroundColor: ['#06bb669f', '#f355259f']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+    });
+    </script>
+    
+
+{% endblock %}

@@ -38,22 +38,30 @@ def index(request):
 # --- Vistas de Dashboard ---
 @login_required
 def dashboard_arrendador(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.tipo_usuario == 'arrendador':
         inmuebles = Inmueble.objects.filter(arrendador=request.user)
         inmuebles_disponibles = inmuebles.filter(estado_inmueble='disponible').count()
         inmuebles_arrendados = inmuebles.filter(estado_inmueble='arrendado').count()
-        ocupacion = (inmuebles_arrendados / inmuebles.count())*100
         total_arriendos = inmuebles.filter(estado_inmueble='arrendado').aggregate(Sum('precio'))['precio__sum']
-
+        total = inmuebles.all().aggregate(Sum('precio'))['precio__sum']
+        
+        try:
+            ocupacion = (inmuebles_arrendados / inmuebles.count())*100
+        except ZeroDivisionError:
+            ocupacion = 0
+            
+            
         
         context = {
+            'inmuebles': inmuebles,
             'inmuebles_disponibles': inmuebles_disponibles,
             'inmuebles_arrendados': inmuebles_arrendados,
             'ocupacion': ocupacion,
-            'cobro_total': total_arriendos
+            'cobro_total': total_arriendos if total_arriendos else 0,
+            'total': total if total else 0
         }
         
-        return render(request, 'dashboard_arrendador.html', context)
+        return render(request, 'dashboard.html', context)
     else:
         # Manejar el caso cuando el usuario no está autenticado
         return render(request, 'acceso_denegado.html')
@@ -65,7 +73,7 @@ def dashboard_arrendador(request):
 def nuevo_aviso(request):
     regiones = Region.objects.all()
     comunas = Comuna.objects.all()
-    es_edicion = False
+    next_url = request.GET.get('next','/#contenido')
 
     if request.method == 'POST':
         formulario = AvisoForm(request.POST, request.FILES, request=request)
@@ -84,7 +92,7 @@ def nuevo_aviso(request):
         'formulario': formulario,
         'regiones': regiones,
         'comunas': comunas,
-        'es_edicion': es_edicion
+        'es_edicion': False
 
     }
     return render(request, 'publicacion_form.html', contextos)
@@ -94,14 +102,15 @@ def editar_aviso(request, aviso_id):
     inmueble = get_object_or_404(Inmueble, pk=aviso_id)
     regiones = Region.objects.all()
     comunas = Comuna.objects.all()
-    es_edicion = True
+    next_url = request.GET.get('next','/#contenido')
+
     if request.method == 'POST':
         formulario = AvisoForm(request.POST, request.FILES, instance=inmueble, request=request)
-        print(formulario)
+        print(inmueble.estado_inmueble)
         if formulario.is_valid():
             formulario.save()
             messages.success(request, f'{iconos["ok"]}\tSe ha editado la publicación.')
-            return redirect('ListaAvisos')
+            return redirect(next_url)
         else:
             messages.error(request,f'{iconos["mal"]}\tUps! Algo salió mal. Revisar la inforamción ingresada.')
     else:
@@ -111,7 +120,8 @@ def editar_aviso(request, aviso_id):
         'formulario': formulario,
         'regiones': regiones,
         'comunas': comunas,
-        'es_edicion': es_edicion
+        'es_edicion': True,
+        'next': next_url
 
     }
 
@@ -200,8 +210,10 @@ def eliminar_aviso(request, aviso_id):
 
 # --- Vistas de usuarios ---
 def nuevo_usuario(request):
+    next_url = request.GET.get('next')
     if request.method=='POST':
         formulario = NuevoUsuarioForm(request.POST)
+        print(formulario)
         if formulario.is_valid():
             try:
                 usuario = formulario.save(commit=False)
@@ -236,6 +248,7 @@ def vista_ficha(request, usuario_id):
 
 @login_required
 def editar_usuario(request, usuario_id):
+    next_url = request.GET.get('next')
     try:
         usuario = Usuario.objects.get(pk=usuario_id)
     except Usuario.DoesNotExist:
@@ -264,8 +277,13 @@ def editar_usuario(request, usuario_id):
             return redirect('ListaUsuarios')
         else:
             return redirect('Ficha', usuario_id=usuario.id)
+        
+    contexto = {
+        'formulario':usuario,
+        'next_url':next_url
+    }
     
-    return render(request, 'usuario_editar.html', {'formulario':usuario})
+    return render(request, 'usuario_editar.html', contexto)
 
 @login_required
 def eliminar_usuario(request, usuario_id):

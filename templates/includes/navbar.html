@@ -32,25 +32,23 @@
                             <span>Arrendador</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item menu" href="{% url 'NuevoAviso' %}#contenido"><i class="fa-solid fa-file-lines"></i> Nueva publicación</a></li>
+                            <li><a class="dropdown-item menu" href="{% url 'NuevoAviso' %}#presentacion?next={% url 'Dashboard' %}#avisos"><i class="fa-solid fa-file-lines"></i> Nueva publicación</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item menu" href="#" target="_blank"><i class="fa-regular fa-envelope" {% if mensajes_pendientes > 0 %} style="color: #f35525" {% else %} style="color: #06bb66" {% endif %}></i> Ver mensajes</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item menu" href="#"><i class="fa-solid fa-list"></i> Mi Dashboard</a></li>
+                            <li><a class="dropdown-item menu" href="{% url 'Dashboard' %}#avisos"><i class="fa-solid fa-list"></i> Mi Dashboard</a></li>
                             <li><a class="dropdown-item menu" href="{% url 'Ficha' user.id %}#usuarios" target="_blank"><i class="fa-solid fa-address-card"></i> Mi cuenta</a></li>
                         </ul>
                     </li>
-                    {% endif %}
-                    {% if user.tipo_usuario == 'arrendatario' %}
+                    {% elif user.tipo_usuario == 'arrendatario' %}
                     <li class="nav-item dropdown menu">
                         <a class="nav-link dropdown-toggle menu" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                             <i class="fa-solid fa-users fs-1"></i>
-                            <span>Arrendador</span>
+                            <span>Arrendatario</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item menu" href="{% url 'Ficha' user.id %}#usuarios" target="_blank"><i class="fa-solid fa-address-card"></i> Mi cuenta</a></li>
-                            <li><a class="dropdown-item menu" href="{% url 'NuevoAviso' %}#aviso"><i class="fa-solid fa-file-lines"></i> Nueva publicación</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -70,7 +68,7 @@
                             <span style="font-size: 14px;">Administrador</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item menu" href="{% url 'NuevoUsuario' %}#usuarios"><i class="fa-solid fa-user-plus"></i> Nuevo usaurio</a></li>
+                            <li><a class="dropdown-item menu" href="{% url 'NuevoUsuario' %}#usuarios"><i class="fa-solid fa-user-plus"></i> Nuevo usuario</a></li>
                             <li><a class="dropdown-item menu" href="{% url 'ListaUsuarios' %}#usuarios"><i class="fa-solid fa-users-gear"></i> Listar Usuarios</a></li>
                             <li>
                                 <hr class="dropdown-divider">
