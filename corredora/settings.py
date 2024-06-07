@@ -28,7 +28,8 @@ SECRET_KEY =  os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','https://inmobiliaria-io.onrender.com/']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000','https://inmobiliaria-io.onrender.com/']
 
 AUTH_USER_MODEL = 'web.Usuario' # Toda vez que no se utilice UserModel, se debe agregar esta linea
 
